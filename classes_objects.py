@@ -1,15 +1,17 @@
 lottery_player_dict = {
     'name': 'Marty D',
-    'numbers': (5,6,7,8,9)
+    'numbers': (5, 6, 7, 8, 9)
 }
+
 
 class LotteryPlayer:
     def __init__(self, name):
         self.name = name
-        self.numbers = (5,6,7,8,9)
+        self.numbers = (5, 6, 7, 8, 9)
 
     def total(self):
         return sum(self.numbers)
+
 
 player_one = LotteryPlayer('Marty D')
 player_two = LotteryPlayer('Marty D')
@@ -17,6 +19,7 @@ player_two = LotteryPlayer('Marty D')
 # print(player_one.name == player_two.name)
 
 ##
+
 
 class Student:
     def __init__(self, name, school):
@@ -29,50 +32,27 @@ class Student:
 
     @staticmethod
     def go_to_school():
-        print('I\'m going to school')    
-
-
-
-anna = Student('Anna', 'MIT')
-anna.marks.append(56)
-anna.marks.append(71)
-
-Student.go_to_school()
-
-
-
-
-
-
-
-
-class Store:
-    def __init__(self, name):
-        self.name = name
-        self.items = []
-
-    def add_item(self, name, price):
-        self.items.append({
-            'name': name,
-            'price': price
-        })
-
-    def stock_price(self):
-        total = 0
-        for item in self.items:
-            total += item['price']
-        return total
+        print('I\'m going to school')
 
     @classmethod
-    def franchise(cls, store):
-        return cls('{} - franchise'.format(store))
-        # Return another store, with the same name as the argument's name, plus " - franchise"
-
-    @staticmethod
-    def store_details(store):
-        return '{}, total stock price: '.format(store.name) + str(store.stock_price())
-        # Return a string representing the argument
-        # It should be in the format 'NAME, total stock price: TOTAL'
+    def friend(cls, origin, friend_name, *args, **kwargs):
+        return cls(friend_name, origin.school, args, kwargs)
 
 
-print(Store.store_details(Store('Walmart')))
+##
+
+class WorkingStudent(Student):
+    def __init__(self, name, school, salary, job_title):
+        super().__init__(name, school)
+        self.salary = salary
+        self.job_title = job_title
+
+
+anna = WorkingStudent('Anna', 'MIT', 20.00, 'Caissiere')
+# anna.marks.append(56)
+# anna.marks.append(71)
+
+friend = WorkingStudent.friend(anna, 'Natasha', 20.00, job_title='developer')
+print(friend.name)
+print(friend.school)
+print(friend.salary)
